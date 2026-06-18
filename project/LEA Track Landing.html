@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lea Track — Turn Every Lead Into Revenue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --green: #2d6a4f;
+    --green-600: #2a6049;
+    --green-700: #1b4332;
+    --green-800: #14302480;
+    --mint: #74c69d;
+    --mint-soft: #d8f3e6;
+    --mint-bg: #eef7f2;
+    --ink: #0f1117;
+    --ink-2: #161922;
+    --white: #ffffff;
+    --paper: #fbfcfb;
+    --gray-50: #f5f7f6;
+    --gray-100: #eef1ef;
+    --line: #e6eae8;
+    --line-dark: #232734;
+    --text: #14181a;
+    --text-2: #56635e;
+    --text-3: #8b958f;
+    --text-inv: #e7ece9;
+    --text-inv-2: #9aa6a0;
+    --radius: 8px;
+    --shadow-card: 0 1px 3px rgba(20,30,25,.06), 0 8px 28px rgba(20,30,25,.06);
+    --shadow-float: 0 30px 70px -20px rgba(20,48,36,.35), 0 0 0 1px rgba(45,106,79,.06);
+    --glow: 0 40px 90px -30px rgba(45,106,79,.45);
+    --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --pad: clamp(64px, 9vw, 120px);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: var(--font); color: var(--text); background: var(--white); -webkit-font-smoothing: antialiased; line-height: 1.6; font-size: 16px; }
+  h1, h2, h3 { margin: 0; letter-spacing: -0.025em; line-height: 1.08; font-weight: 800; }
+  p { margin: 0; }
+  a { color: inherit; text-decoration: none; }
+  img, svg { display: block; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+  .tnum { font-variant-numeric: tabular-nums; }
+
+  section { padding: var(--pad) 0; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--green); margin-bottom: 18px; }
+  .eyebrow.inv { color: var(--mint); }
+  .eyebrow::before { content: ""; width: 18px; height: 2px; background: currentColor; border-radius: 2px; }
+
+  /* ---------- Buttons ---------- */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 48px; padding: 0 22px; border-radius: var(--radius); font-weight: 600; font-size: 15px; border: 1.5px solid transparent; cursor: pointer; transition: transform .12s ease, background .18s, border-color .18s, box-shadow .18s; font-family: inherit; white-space: nowrap; }
+  .btn:active { transform: translateY(1px); }
+  .btn-green { background: var(--green); color: #fff; box-shadow: 0 6px 18px -6px rgba(45,106,79,.6); }
+  .btn-green:hover { background: var(--green-700); box-shadow: 0 10px 24px -8px rgba(45,106,79,.7); }
+  .btn-ghost { background: transparent; color: var(--text); border-color: var(--line); }
+  .btn-ghost:hover { border-color: var(--green); color: var(--green); background: var(--mint-bg); }
+  .btn-white { background: #fff; color: var(--green-700); }
+  .btn-white:hover { background: var(--mint-soft); }
+  .btn-ghost-inv { background: transparent; color: #fff; border-color: rgba(255,255,255,.28); }
+  .btn-ghost-inv:hover { border-color: var(--mint); color: var(--mint); }
+  .btn-sm { height: 40px; padding: 0 16px; font-size: 14px; }
+
+  /* ---------- Nav ---------- */
+  header.nav { position: sticky; top: 0; z-index: 50; transition: box-shadow .25s, background .25s, border-color .25s; border-bottom: 1px solid transparent; }
+  header.nav.scrolled { background: rgba(255,255,255,.72); backdrop-filter: saturate(180%) blur(14px); -webkit-backdrop-filter: saturate(180%) blur(14px); border-color: var(--line); }
+  .nav-inner { display: flex; align-items: center; height: 70px; gap: 28px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 19px; letter-spacing: -.02em; }
+  .logo .mark { width: 32px; height: 32px; border-radius: 8px; background: var(--green); display: grid; place-items: center; box-shadow: 0 4px 12px -3px rgba(45,106,79,.6); }
+  .nav-links { display: flex; gap: 30px; margin-left: 14px; flex: 1; }
+  .nav-links a { font-size: 14.5px; font-weight: 500; color: var(--text-2); transition: color .15s; }
+  .nav-links a:hover { color: var(--green); }
+  .nav-cta { display: flex; align-items: center; gap: 12px; }
+  .nav-cta .ghost-link { font-size: 14.5px; font-weight: 600; color: var(--text); padding: 0 6px; }
+  .nav-cta .ghost-link:hover { color: var(--green); }
+  .burger { display: none; width: 42px; height: 42px; border: 1px solid var(--line); border-radius: 8px; background: #fff; cursor: pointer; align-items: center; justify-content: center; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding-top: clamp(48px, 7vw, 92px); padding-bottom: var(--pad); position: relative; overflow: hidden; }
+  .hero::before { content: ""; position: absolute; top: -200px; right: -160px; width: 620px; height: 620px; background: radial-gradient(circle, rgba(116,198,157,.20), transparent 64%); z-index: 0; }
+  .hero-grid { display: grid; grid-template-columns: 1fr 1.06fr; gap: 56px; align-items: center; position: relative; z-index: 1; }
+  .hero h1 { font-size: clamp(40px, 5.4vw, 66px); font-weight: 900; }
+  .hero h1 .accent { color: var(--green); }
+  .hero .sub { font-size: clamp(16.5px, 1.5vw, 19px); color: var(--text-2); margin: 22px 0 32px; max-width: 520px; font-weight: 400; }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+  .pill-badge { display: inline-flex; align-items: center; gap: 9px; height: 32px; padding: 0 14px 0 10px; border-radius: 999px; background: var(--mint-bg); border: 1px solid var(--mint-soft); color: var(--green-700); font-size: 13px; font-weight: 600; margin-bottom: 26px; }
+  .pill-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+
+  /* ---------- Browser frame mockup ---------- */
+  .frame { border-radius: 14px; background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow-float), var(--glow); overflow: hidden; }
+  .frame-bar { display: flex; align-items: center; gap: 7px; padding: 11px 14px; background: var(--gray-50); border-bottom: 1px solid var(--line); }
+  .frame-bar .tl { width: 11px; height: 11px; border-radius: 50%; }
+  .frame-bar .url { margin-left: 12px; flex: 1; height: 24px; border-radius: 6px; background: #fff; border: 1px solid var(--line); display: flex; align-items: center; padding: 0 10px; font-size: 11.5px; color: var(--text-3); gap: 6px; }
+  .frame-body { padding: 18px; }
+
+  /* dashboard mockup */
+  .mk-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .mk-title { font-weight: 700; font-size: 14px; }
+  .mk-chip { font-size: 11px; font-weight: 600; color: var(--text-3); background: var(--gray-50); border: 1px solid var(--line); padding: 4px 9px; border-radius: 6px; }
+  .mk-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 16px; }
+  .mk-stat { border: 1px solid var(--line); border-radius: 9px; padding: 11px 12px; }
+  .mk-stat .l { font-size: 10.5px; color: var(--text-3); font-weight: 600; }
+  .mk-stat .v { font-size: 20px; font-weight: 800; letter-spacing: -.02em; margin-top: 3px; }
+  .donut-row { display: flex; align-items: center; gap: 20px; border: 1px solid var(--line); border-radius: 11px; padding: 16px; }
+  .donut { width: 132px; height: 132px; border-radius: 50%; flex: none; display: grid; place-items: center; position: relative; }
+  .donut::after { content: ""; position: absolute; inset: 19px; background: #fff; border-radius: 50%; }
+  .donut .center { position: relative; z-index: 1; text-align: center; }
+  .donut .center .n { font-size: 26px; font-weight: 800; letter-spacing: -.02em; }
+  .donut .center .t { font-size: 9.5px; font-weight: 700; letter-spacing: .06em; color: var(--text-3); }
+  .legend { display: flex; flex-direction: column; gap: 9px; flex: 1; }
+  .legend .row { display: flex; align-items: center; gap: 9px; font-size: 12px; }
+  .legend .row .sw { width: 9px; height: 9px; border-radius: 3px; flex: none; }
+  .legend .row .nm { flex: 1; font-weight: 500; color: var(--text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .legend .row .vl { font-weight: 700; font-size: 12px; }
+
+  /* table mockup */
+  .mk-tabs { display: flex; gap: 6px; margin-bottom: 14px; }
+  .mk-tab { font-size: 12px; font-weight: 700; padding: 7px 13px; border-radius: 7px; display: flex; align-items: center; gap: 6px; }
+  .mk-tab .d { width: 7px; height: 7px; border-radius: 50%; }
+  .mk-tab.on { color: #fff; }
+  .mk-tab.off { color: var(--text-3); background: var(--gray-50); }
+  table.mk-tbl { width: 100%; border-collapse: collapse; font-size: 12px; }
+  table.mk-tbl th { text-align: left; font-size: 9.5px; text-transform: uppercase; letter-spacing: .05em; color: var(--text-3); font-weight: 700; padding: 8px 8px; border-bottom: 1px solid var(--line); }
+  table.mk-tbl td { padding: 9px 8px; border-bottom: 1px solid var(--gray-100); color: var(--text-2); }
+  table.mk-tbl tr:last-child td { border-bottom: none; }
+  .mk-name { display: flex; align-items: center; gap: 8px; }
+  .mk-av { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-size: 10px; font-weight: 700; flex: none; }
+  .mk-name .nm { font-weight: 600; color: var(--text); }
+  .mk-status { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 11.5px; }
+  .mk-status .sd { width: 7px; height: 7px; border-radius: 50%; }
+
+  /* ---------- Social proof ---------- */
+  .proof { background: var(--gray-50); padding: 40px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .proof .label { text-align: center; font-size: 13.5px; font-weight: 600; color: var(--text-3); margin-bottom: 22px; }
+  .proof .logos { display: flex; justify-content: center; align-items: center; gap: clamp(24px, 5vw, 60px); flex-wrap: wrap; }
+  .proof .logos .lg { font-weight: 800; font-size: 18px; letter-spacing: -.02em; color: #aab4af; display: flex; align-items: center; gap: 8px; }
+
+  /* ---------- Section headings ---------- */
+  .sec-head { max-width: 680px; margin: 0 auto 56px; text-align: center; }
+  .sec-head h2 { font-size: clamp(30px, 3.6vw, 44px); }
+  .sec-head p { color: var(--text-2); font-size: 17px; margin-top: 16px; }
+  .sec-head.left { margin-left: 0; text-align: left; }
+  .inv .sec-head h2, .inv h2 { color: #fff; }
+  .inv .sec-head p { color: var(--text-inv-2); }
+
+  /* ---------- Problem cards ---------- */
+  .cards-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .pain { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 30px 26px; box-shadow: var(--shadow-card); }
+  .pain .ic { width: 48px; height: 48px; border-radius: 11px; background: var(--mint-bg); color: var(--green); display: grid; place-items: center; margin-bottom: 18px; }
+  .pain h3 { font-size: 18.5px; font-weight: 700; }
+  .pain p { color: var(--text-2); font-size: 14.5px; margin-top: 9px; }
+  .big-stat { text-align: center; }
+  .big-stat .num { font-size: clamp(48px, 7vw, 80px); font-weight: 900; color: var(--green); letter-spacing: -.04em; line-height: 1; }
+
+  /* ---------- Dark section ---------- */
+  .dark { background: var(--ink); color: var(--text-inv); }
+  .dark .pain, .step-card { background: var(--ink-2); border-color: var(--line-dark); box-shadow: none; }
+
+  /* ---------- How it works steps ---------- */
+  .step { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; margin-bottom: 72px; }
+  .step:last-child { margin-bottom: 0; }
+  .step.rev .step-text { order: 2; }
+  .step-num { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 11px; background: var(--green); color: #fff; font-weight: 800; font-size: 18px; margin-bottom: 18px; }
+  .step h3 { font-size: clamp(24px, 2.6vw, 32px); color: #fff; font-weight: 800; }
+  .step .desc { color: var(--text-inv-2); font-size: 16px; margin-top: 14px; max-width: 420px; }
+  .step .frame { box-shadow: 0 30px 70px -20px rgba(0,0,0,.6), 0 0 0 1px rgba(116,198,157,.12), 0 0 60px -20px rgba(116,198,157,.3); border-color: var(--line-dark); }
+  .step .frame-bar { background: #1b1f29; border-color: var(--line-dark); }
+  .step .frame-bar .url { background: #0f1117; border-color: var(--line-dark); color: var(--text-inv-2); }
+  .step .frame-body { background: #fff; }
+
+  /* ---------- Features ---------- */
+  .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .feat { border: 1px solid var(--line); border-radius: 14px; padding: 28px 26px; background: #fff; transition: transform .2s, box-shadow .2s, border-color .2s; }
+  .feat:hover { transform: translateY(-3px); box-shadow: var(--shadow-card); border-color: var(--mint); }
+  .feat .ic { width: 46px; height: 46px; border-radius: 11px; background: var(--green); color: #fff; display: grid; place-items: center; margin-bottom: 18px; box-shadow: 0 6px 16px -6px rgba(45,106,79,.6); }
+  .feat h3 { font-size: 18px; font-weight: 700; }
+  .feat p { color: var(--text-2); font-size: 14.5px; margin-top: 8px; }
+
+  /* ---------- Showcase ---------- */
+  .showcase { background: var(--mint-bg); }
+  .showcase .frame { max-width: 940px; margin: 0 auto; }
+  .callouts { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-top: 30px; }
+  .callout { display: inline-flex; align-items: center; gap: 8px; background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 8px 15px; font-size: 13px; font-weight: 600; color: var(--green-700); box-shadow: var(--shadow-card); }
+  .callout .n { width: 20px; height: 20px; border-radius: 50%; background: var(--green); color: #fff; display: grid; place-items: center; font-size: 11px; font-weight: 800; }
+
+  /* ---------- Testimonials ---------- */
+  .quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .quote { background: var(--ink-2); border: 1px solid var(--line-dark); border-radius: 14px; padding: 28px; }
+  .quote .stars { color: var(--mint); font-size: 14px; letter-spacing: 2px; margin-bottom: 14px; }
+  .quote .q { font-size: 16px; color: var(--text-inv); line-height: 1.55; font-weight: 500; }
+  .quote .who { display: flex; align-items: center; gap: 12px; margin-top: 22px; }
+  .quote .who .av { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 14px; flex: none; }
+  .quote .who .nm { font-weight: 700; font-size: 14.5px; color: #fff; }
+  .quote .who .co { font-size: 13px; color: var(--text-inv-2); }
+
+  /* ---------- Pricing ---------- */
+  .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: stretch; }
+  .tier { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 32px 28px; display: flex; flex-direction: column; }
+  .tier.pop { background: var(--green); color: #fff; border-color: var(--green); box-shadow: var(--glow); position: relative; transform: translateY(-8px); }
+  .tier .tag { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--green); }
+  .tier.pop .tag { color: var(--mint-soft); }
+  .tier .pop-badge { position: absolute; top: 18px; right: 18px; background: var(--mint); color: var(--green-700); font-size: 11px; font-weight: 800; padding: 4px 11px; border-radius: 999px; text-transform: uppercase; letter-spacing: .04em; }
+  .tier .price { font-size: 46px; font-weight: 900; letter-spacing: -.03em; margin: 16px 0 4px; }
+  .tier .price span { font-size: 16px; font-weight: 600; color: var(--text-3); }
+  .tier.pop .price span { color: var(--mint-soft); }
+  .tier .pdesc { font-size: 14px; color: var(--text-2); min-height: 40px; }
+  .tier.pop .pdesc { color: var(--mint-soft); }
+  .tier ul { list-style: none; padding: 0; margin: 24px 0; display: flex; flex-direction: column; gap: 13px; flex: 1; }
+  .tier li { display: flex; align-items: flex-start; gap: 10px; font-size: 14.5px; color: var(--text-2); }
+  .tier.pop li { color: #eaf6f0; }
+  .tier li .ck { color: var(--green); flex: none; margin-top: 1px; }
+  .tier.pop li .ck { color: var(--mint); }
+
+  /* ---------- Final CTA ---------- */
+  .final { background: var(--green-700); color: #fff; text-align: center; position: relative; overflow: hidden; }
+  .final::before, .final::after { content: ""; position: absolute; width: 460px; height: 460px; border-radius: 50%; background: radial-gradient(circle, rgba(116,198,157,.22), transparent 64%); }
+  .final::before { top: -200px; left: -120px; }
+  .final::after { bottom: -240px; right: -120px; }
+  .final h2 { font-size: clamp(32px, 4.4vw, 52px); font-weight: 900; position: relative; }
+  .final p { color: #c9e6d8; font-size: 18px; margin: 18px 0 32px; position: relative; }
+  .final .btn { position: relative; height: 54px; padding: 0 30px; font-size: 16px; }
+
+  /* ---------- Footer ---------- */
+  footer { background: var(--ink); color: var(--text-inv-2); padding: 64px 0 32px; }
+  .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr; gap: 32px; padding-bottom: 44px; border-bottom: 1px solid var(--line-dark); }
+  .foot-brand .logo { color: #fff; margin-bottom: 14px; }
+  .foot-brand p { font-size: 14px; max-width: 240px; }
+  .foot-col h4 { color: #fff; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 16px; }
+  .foot-col a { display: block; font-size: 14px; margin-bottom: 11px; color: var(--text-inv-2); transition: color .15s; }
+  .foot-col a:hover { color: var(--mint); }
+  .foot-bottom { padding-top: 24px; font-size: 13px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+
+  /* ---------- Reveal animation ---------- */
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+  /* ---------- Mobile menu ---------- */
+  .mobile-menu { display: none; position: fixed; inset: 70px 0 0; background: #fff; z-index: 49; flex-direction: column; padding: 24px 28px; gap: 4px; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-size: 18px; font-weight: 600; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .mobile-menu .btn { margin-top: 16px; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 920px) {
+    .nav-links, .nav-cta .ghost-link, .nav-cta .btn { display: none; }
+    .burger { display: flex; }
+    .nav-cta .btn.mobile-show { display: inline-flex; }
+    .hero-grid, .step, .step.rev .step-text { grid-template-columns: 1fr; }
+    .step.rev .step-text { order: 0; }
+    .hero-mock { order: -1; }
+    .cards-3, .feat-grid, .quotes, .tiers { grid-template-columns: 1fr; }
+    .tier.pop { transform: none; }
+    .foot-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+    .foot-brand { grid-column: 1 / -1; }
+  }
+  @media (max-width: 560px) {
+    .mk-stats { grid-template-columns: 1fr 1fr; }
+    table.mk-tbl .hide-sm { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="#top">
+      <span class="mark">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+      </span>
+      Lea Track
+    </a>
+    <nav class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how">How It Works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#about">About</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="ghost-link" href="#">Log In</a>
+      <a class="btn btn-green btn-sm mobile-show" href="#pricing">Get Started</a>
+      <button class="burger" id="burger" aria-label="Menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#14181a" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#features">Features</a>
+  <a href="#how">How It Works</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#about">About</a>
+  <a href="#">Log In</a>
+  <a class="btn btn-green" href="#pricing">Get Started</a>
+</div>
+
+<a id="top"></a>
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="reveal in">
+      <span class="pill-badge"><span class="dot"></span>Contact → Enrich → Convert</span>
+      <h1>Turn Every Lead<br>Into <span class="accent">Revenue.</span></h1>
+      <p class="sub">Lea Track is your all-in-one smart lead management system — built for real estate teams who refuse to let great leads slip away.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-green" href="#pricing">Start Free Trial</a>
+        <a class="btn btn-ghost" href="#how">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          Watch Demo
+        </a>
+      </div>
+    </div>
+
+    <!-- Dashboard mockup -->
+    <div class="hero-mock reveal in" style="transition-delay:.1s">
+      <div class="frame">
+        <div class="frame-bar">
+          <span class="tl" style="background:#ff5f57"></span><span class="tl" style="background:#febc2e"></span><span class="tl" style="background:#28c840"></span>
+          <span class="url">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#8b958f" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            app.leatrack.io/dashboard
+          </span>
+        </div>
+        <div class="frame-body">
+          <div class="mk-head">
+            <span class="mk-title">Dashboard</span>
+            <span class="mk-chip">Showing 250 Leads</span>
+          </div>
+          <div class="mk-stats">
+            <div class="mk-stat"><div class="l">In Contact</div><div class="v tnum">128</div></div>
+            <div class="mk-stat"><div class="l">In Enrich</div><div class="v tnum">79</div></div>
+            <div class="mk-stat"><div class="l">Converted</div><div class="v tnum" style="color:var(--green)">43</div></div>
+          </div>
+          <div class="donut-row">
+            <div class="donut" style="background:conic-gradient(#2d6a4f 0 30%, #40916c 30% 52%, #74c69d 52% 70%, #95d5b2 70% 84%, #b7e4c7 84% 94%, #d8f3e6 94% 100%)">
+              <div class="center"><div class="n tnum">250</div><div class="t">TOTAL LEADS</div></div>
+            </div>
+            <div class="legend">
+              <div class="row"><span class="sw" style="background:#2d6a4f"></span><span class="nm">Maple Grove Estates</span><span class="vl tnum">75</span></div>
+              <div class="row"><span class="sw" style="background:#40916c"></span><span class="nm">Harbor View Condos</span><span class="vl tnum">55</span></div>
+              <div class="row"><span class="sw" style="background:#74c69d"></span><span class="nm">Cedar Ridge Townhomes</span><span class="vl tnum">45</span></div>
+              <div class="row"><span class="sw" style="background:#95d5b2"></span><span class="nm">Sunset Bay Villas</span><span class="vl tnum">35</span></div>
+              <div class="row"><span class="sw" style="background:#b7e4c7"></span><span class="nm">Downtown Lofts 360</span><span class="vl tnum">25</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOCIAL PROOF ============ -->
+<div class="proof">
+  <div class="wrap">
+    <p class="label">Trusted by 500+ real estate teams across the US</p>
+    <div class="logos">
+      <span class="lg">Northpoint Realty</span>
+      <span class="lg">Vanguard Homes</span>
+      <span class="lg">BlueKey Properties</span>
+      <span class="lg">Meridian Group</span>
+      <span class="lg">Anchor &amp; Co.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PROBLEM ============ -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="big-stat"><div class="num">30%</div></div>
+      <h2 style="margin-top:18px">of leads are never followed up.<br>Is yours one of them?</h2>
+      <p>Most teams lose deals not from bad leads — but from leads that fall through the cracks. Here's where it breaks down.</p>
+    </div>
+    <div class="cards-3">
+      <div class="pain reveal">
+        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/><line x1="2" y1="2" x2="22" y2="22"/></svg></div>
+        <h3>No single source for leads</h3>
+        <p>Leads scatter across inboxes, spreadsheets, and sticky notes — with no one place to see them all.</p>
+      </div>
+      <div class="pain reveal" style="transition-delay:.08s">
+        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/><line x1="3" y1="3" x2="21" y2="21"/></svg></div>
+        <h3>No visibility into behavior</h3>
+        <p>Without tracking what a lead does, your team is guessing who's ready to buy — and who's gone cold.</p>
+      </div>
+      <div class="pain reveal" style="transition-delay:.16s">
+        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Poor Sales &amp; Marketing sync</h3>
+        <p>Marketing hands off leads Sales never works. Hot prospects stall in the gap between the two teams.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="dark inv" id="how">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow inv">The Lea Track method</span>
+      <h2>From Contact to Conversion —<br>in 3 simple steps</h2>
+    </div>
+
+    <!-- Step 1: Generate -->
+    <div class="step reveal">
+      <div class="step-text">
+        <span class="step-num">1</span>
+        <h3>Generate</h3>
+        <p class="desc">Capture every lead in one centralized place — web forms, open houses, referrals, and imports all flow into a single Contact pipeline.</p>
+      </div>
+      <div class="step-mock">
+        <div class="frame">
+          <div class="frame-bar"><span class="tl" style="background:#ff5f57"></span><span class="tl" style="background:#febc2e"></span><span class="tl" style="background:#28c840"></span><span class="url">app.leatrack.io/contacts</span></div>
+          <div class="frame-body">
+            <div class="mk-tabs">
+              <span class="mk-tab on" style="background:#2d6a4f"><span class="d" style="background:#fff"></span>Contact</span>
+              <span class="mk-tab off"><span class="d" style="background:#74c69d"></span>Enrich</span>
+              <span class="mk-tab off"><span class="d" style="background:#95d5b2"></span>Convert</span>
+            </div>
+            <table class="mk-tbl">
+              <thead><tr><th>Name</th><th class="hide-sm">Email</th><th>Source</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td><div class="mk-name"><span class="mk-av" style="background:#2d6a4f">OB</span><span class="nm">Olivia Bennett</span></div></td><td class="hide-sm">olivia.b@email.com</td><td>Web form</td><td><span class="mk-status" style="color:#c0561f"><span class="sd" style="background:#c0561f"></span>Not contacted</span></td></tr>
+                <tr><td><div class="mk-name"><span class="mk-av" style="background:#40916c">LX</span><span class="nm">Logan Xu</span></div></td><td class="hide-sm">logan.x@email.com</td><td>Open house</td><td><span class="mk-status" style="color:#3b6fe0"><span class="sd" style="background:#3b6fe0"></span>Contacted</span></td></tr>
+                <tr><td><div class="mk-name"><span class="mk-av" style="background:#74c69d">NR</span><span class="nm">Nadia Reyes</span></div></td><td class="hide-sm">nadia.r@email.com</td><td>Referral</td><td><span class="mk-status" style="color:#8b958f"><span class="sd" style="background:#8b958f"></span>Imported</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2: Enrich -->
+    <div class="step rev reveal">
+      <div class="step-text">
+        <span class="step-num" style="background:#40916c">2</span>
+        <h3>Enrich</h3>
+        <p class="desc">Nurture promising leads with targeted, personalized outreach. Lead scores rise as interest builds — so you always know who's heating up.</p>
+      </div>
+      <div class="step-mock">
+        <div class="frame">
+          <div class="frame-bar"><span class="tl" style="background:#ff5f57"></span><span class="tl" style="background:#febc2e"></span><span class="tl" style="background:#28c840"></span><span class="url">app.leatrack.io/contacts</span></div>
+          <div class="frame-body">
+            <div class="mk-tabs">
+              <span class="mk-tab off"><span class="d" style="background:#2d6a4f"></span>Contact</span>
+              <span class="mk-tab on" style="background:#40916c"><span class="d" style="background:#fff"></span>Enrich</span>
+              <span class="mk-tab off"><span class="d" style="background:#95d5b2"></span>Convert</span>
+            </div>
+            <table class="mk-tbl">
+              <thead><tr><th>Name</th><th class="hide-sm">City</th><th>Score</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td><div class="mk-name"><span class="mk-av" style="background:#2d6a4f">SQ</span><span class="nm">Sophia Quinn</span></div></td><td class="hide-sm">Boulder, CO</td><td><div style="display:flex;align-items:center;gap:7px"><div style="width:48px;height:6px;border-radius:9px;background:#eef1ef;overflow:hidden"><span style="display:block;height:100%;width:62%;background:#40916c"></span></div><b class="tnum" style="color:#14181a">62</b></div></td><td><span class="mk-status" style="color:#3b6fe0"><span class="sd" style="background:#3b6fe0"></span>Contacted</span></td></tr>
+                <tr><td><div class="mk-name"><span class="mk-av" style="background:#40916c">JU</span><span class="nm">Jackson Underwood</span></div></td><td class="hide-sm">Seattle, WA</td><td><div style="display:flex;align-items:center;gap:7px"><div style="width:48px;height:6px;border-radius:9px;background:#eef1ef;overflow:hidden"><span style="display:block;height:100%;width:54%;background:#40916c"></span></div><b class="tnum" style="color:#14181a">54</b></div></td><td><span class="mk-status" style="color:#3b6fe0"><span class="sd" style="background:#3b6fe0"></span>Contacted</span></td></tr>
+                <tr><td><div class="mk-name"><span class="mk-av" style="background:#74c69d">AM</span><span class="nm">Amelia Mercer</span></div></td><td class="hide-sm">Austin, TX</td><td><div style="display:flex;align-items:center;gap:7px"><div style="width:48px;height:6px;border-radius:9px;background:#eef1ef;overflow:hidden"><span style="display:block;height:100%;width:48%;background:#40916c"></span></div><b class="tnum" style="color:#14181a">48</b></div></td><td><span class="mk-status" style="color:#18996a"><span class="sd" style="background:#18996a"></span>Customer</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3: Convert -->
+    <div class="step reveal">
+      <div class="step-text">
+        <span class="step-num" style="background:#74c69d;color:#14302480">3</span>
+        <h3>Convert</h3>
+        <p class="desc">Hand qualified leads to Sales the moment they cross your threshold — with full context, so reps close instead of chasing.</p>
+      </div>
+      <div class="step-mock">
+        <div class="frame">
+          <div class="frame-bar"><span class="tl" style="background:#ff5f57"></span><span class="tl" style="background:#febc2e"></span><span class="tl" style="background:#28c840"></span><span class="url">app.leatrack.io/contacts</span></div>
+          <div class="frame-body">
+            <div class="mk-tabs">
+              <span class="mk-tab off"><span class="d" style="background:#2d6a4f"></span>Contact</span>
+              <span class="mk-tab off"><span class="d" style="background:#40916c"></span>Enrich</span>
+              <span class="mk-tab on" style="background:#1b4332"><span class="d" style="background:#fff"></span>Convert</span>
+            </div>
+            <table class="mk-tbl">
+              <thead><tr><th>Name</th><th class="hide-sm">Property</th><th>Score</th><th>Action</th></tr></thead>
+              <tbody>
+                <tr><td><div class="mk-name"><span class="mk-av" style="background:#2d6a4f">DA</span><span class="nm">Diego Acosta</span></div></td><td class="hide-sm">Maple Grove</td><td><b class="tnum" style="color:#2d6a4f">91</b></td><td><span style="font-size:11px;font-weight:700;color:#1b4332;background:#d8f3e6;padding:4px 9px;border-radius:6px">Graduate →</span></td></tr>
+                <tr><td><div class="mk-name"><span class="mk-av" style="background:#40916c">FP</span><span class="nm">Fatima Patel</span></div></td><td class="hide-sm">Harbor View</td><td><b class="tnum" style="color:#2d6a4f">88</b></td><td><span style="font-size:11px;font-weight:700;color:#1b4332;background:#d8f3e6;padding:4px 9px;border-radius:6px">Graduate →</span></td></tr>
+                <tr><td><div class="mk-name"><span class="mk-av" style="background:#74c69d">RY</span><span class="nm">Ravi Young</span></div></td><td class="hide-sm">Cedar Ridge</td><td><b class="tnum" style="color:#2d6a4f">84</b></td><td><span style="font-size:11px;font-weight:700;color:#1b4332;background:#d8f3e6;padding:4px 9px;border-radius:6px">Graduate →</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURES ============ -->
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Features</span>
+      <h2>Everything your team needs.<br>Nothing they don't.</h2>
+    </div>
+    <div class="feat-grid">
+      <div class="feat reveal">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.8L20 9.2l-4.7 3.6L17 19l-5-3.5L7 19l1.7-6.2L4 9.2l6.1-.4z"/></svg></div>
+        <h3>Lead Scoring &amp; Prioritization</h3>
+        <p>Every lead gets a live score so your team works the hottest prospects first — never guessing.</p>
+      </div>
+      <div class="feat reveal" style="transition-delay:.06s">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg></div>
+        <h3>Automated Lead Capture</h3>
+        <p>Pull leads from forms, open houses, and uploads straight into one pipeline — no manual entry.</p>
+      </div>
+      <div class="feat reveal" style="transition-delay:.12s">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></div>
+        <h3>Contact Manager</h3>
+        <p>A clean 3-stage pipeline — Contact, Enrich, Convert — so everyone knows the next move.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg></div>
+        <h3>Real-time Analytics</h3>
+        <p>Dashboards and reports show pipeline health and conversion rates at a glance.</p>
+      </div>
+      <div class="feat reveal" style="transition-delay:.06s">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Team Coordination</h3>
+        <p>Bridge Sales and Marketing with shared context, handoffs, and roles built in.</p>
+      </div>
+      <div class="feat reveal" style="transition-delay:.12s">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></div>
+        <h3>Property-Based Distribution</h3>
+        <p>Route leads to the right agent by property, region, or rule — automatically.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SHOWCASE ============ -->
+<section class="showcase">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>All your leads. One screen. Zero confusion.</h2>
+      <p>The Lead Manager gives Sales a single, sortable view of every qualified lead — name, email, location, status, and property.</p>
+    </div>
+    <div class="frame reveal">
+      <div class="frame-bar"><span class="tl" style="background:#ff5f57"></span><span class="tl" style="background:#febc2e"></span><span class="tl" style="background:#28c840"></span><span class="url">app.leatrack.io/leads</span></div>
+      <div class="frame-body" style="padding:22px">
+        <div class="mk-head"><span class="mk-title" style="font-size:15px">Lead Manager</span><span class="mk-chip">11 qualified leads</span></div>
+        <table class="mk-tbl" style="font-size:13px">
+          <thead><tr><th>Name</th><th class="hide-sm">Email</th><th class="hide-sm">City</th><th>State</th><th>Status</th><th>Property</th></tr></thead>
+          <tbody>
+            <tr><td><div class="mk-name"><span class="mk-av" style="background:#2d6a4f">DA</span><span class="nm">Diego Acosta</span></div></td><td class="hide-sm">diego.a@email.com</td><td class="hide-sm">Austin</td><td>TX</td><td><span class="mk-status" style="color:#18996a"><span class="sd" style="background:#18996a"></span>Customer</span></td><td>Maple Grove</td></tr>
+            <tr><td><div class="mk-name"><span class="mk-av" style="background:#40916c">FP</span><span class="nm">Fatima Patel</span></div></td><td class="hide-sm">fatima.p@email.com</td><td class="hide-sm">Denver</td><td>CO</td><td><span class="mk-status" style="color:#6b4ee0"><span class="sd" style="background:#6b4ee0"></span>Closed</span></td><td>Harbor View</td></tr>
+            <tr><td><div class="mk-name"><span class="mk-av" style="background:#74c69d">RY</span><span class="nm">Ravi Young</span></div></td><td class="hide-sm">ravi.y@email.com</td><td class="hide-sm">Seattle</td><td>WA</td><td><span class="mk-status" style="color:#18996a"><span class="sd" style="background:#18996a"></span>Customer</span></td><td>Cedar Ridge</td></tr>
+            <tr><td><div class="mk-name"><span class="mk-av" style="background:#95d5b2">MN</span><span class="nm">Mei Nguyen</span></div></td><td class="hide-sm">mei.n@email.com</td><td class="hide-sm">Portland</td><td>OR</td><td><span class="mk-status" style="color:#3b6fe0"><span class="sd" style="background:#3b6fe0"></span>Contacted</span></td><td>Sunset Bay</td></tr>
+            <tr><td><div class="mk-name"><span class="mk-av" style="background:#2d6a4f">OW</span><span class="nm">Omar Whitman</span></div></td><td class="hide-sm">omar.w@email.com</td><td class="hide-sm">Tampa</td><td>FL</td><td><span class="mk-status" style="color:#18996a"><span class="sd" style="background:#18996a"></span>Customer</span></td><td>Downtown Lofts</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="callouts reveal">
+      <span class="callout"><span class="n">1</span>Filter by name</span>
+      <span class="callout"><span class="n">2</span>Sort any column A–Z</span>
+      <span class="callout"><span class="n">3</span>Status at a glance</span>
+      <span class="callout"><span class="n">4</span>Grouped by property</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="dark inv">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow inv">Loved by teams</span>
+      <h2>Results that close deals</h2>
+    </div>
+    <div class="quotes">
+      <div class="quote reveal">
+        <div class="stars">★★★★★</div>
+        <p class="q">"We stopped losing leads in the gap between marketing and sales. Lea Track paid for itself in the first month."</p>
+        <div class="who"><span class="av" style="background:#2d6a4f">JM</span><div><div class="nm">Jordan Mills</div><div class="co">Sales Director, Northpoint Realty</div></div></div>
+      </div>
+      <div class="quote reveal" style="transition-delay:.08s">
+        <div class="stars">★★★★★</div>
+        <p class="q">"The Contact → Enrich → Convert flow just makes sense. My agents finally know exactly who to call next."</p>
+        <div class="who"><span class="av" style="background:#40916c">PA</span><div><div class="nm">Priya Anand</div><div class="co">Broker, Vanguard Homes</div></div></div>
+      </div>
+      <div class="quote reveal" style="transition-delay:.16s">
+        <div class="stars">★★★★★</div>
+        <p class="q">"Lead scoring changed how we prioritize. We're converting 2x more without adding a single rep."</p>
+        <div class="who"><span class="av" style="background:#74c69d;color:#14302480">MC</span><div><div class="nm">Marcus Cole</div><div class="co">Marketing Lead, BlueKey Properties</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Pricing</span>
+      <h2>Simple pricing that scales with you</h2>
+      <p>Start free for 14 days. No credit card required.</p>
+    </div>
+    <div class="tiers">
+      <div class="tier reveal">
+        <span class="tag">Starter</span>
+        <div class="price">$29<span>/mo</span></div>
+        <p class="pdesc">For solo agents getting organized.</p>
+        <ul>
+          <li><span class="ck">✓</span>Up to 500 leads</li>
+          <li><span class="ck">✓</span>Contact Manager pipeline</li>
+          <li><span class="ck">✓</span>Basic lead scoring</li>
+          <li><span class="ck">✓</span>1 user seat</li>
+        </ul>
+        <a class="btn btn-ghost" href="#" style="width:100%">Start Free Trial</a>
+      </div>
+      <div class="tier pop reveal" style="transition-delay:.08s">
+        <span class="pop-badge">Most Popular</span>
+        <span class="tag">Growth</span>
+        <div class="price">$89<span>/mo</span></div>
+        <p class="pdesc">For growing teams that need coordination.</p>
+        <ul>
+          <li><span class="ck">✓</span>Unlimited leads</li>
+          <li><span class="ck">✓</span>Advanced scoring &amp; rules</li>
+          <li><span class="ck">✓</span>Real-time analytics</li>
+          <li><span class="ck">✓</span>Property-based distribution</li>
+          <li><span class="ck">✓</span>Up to 10 user seats</li>
+        </ul>
+        <a class="btn btn-white" href="#" style="width:100%">Start Free Trial</a>
+      </div>
+      <div class="tier reveal" style="transition-delay:.16s">
+        <span class="tag">Enterprise</span>
+        <div class="price">Custom</div>
+        <p class="pdesc">For brokerages running at scale.</p>
+        <ul>
+          <li><span class="ck">✓</span>Everything in Growth</li>
+          <li><span class="ck">✓</span>Unlimited seats &amp; roles</li>
+          <li><span class="ck">✓</span>Dedicated success manager</li>
+          <li><span class="ck">✓</span>SSO &amp; priority support</li>
+        </ul>
+        <a class="btn btn-ghost" href="#" style="width:100%">Contact Sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="final">
+  <div class="wrap reveal">
+    <h2>Ready to stop losing leads?</h2>
+    <p>Set up Lea Track in minutes. No credit card required.</p>
+    <a class="btn btn-white" href="#pricing">Start Free Trial</a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="logo" href="#top">
+          <span class="mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg></span>
+          Lea Track
+        </a>
+        <p>Smart Lead Tracking — turn every lead into revenue.</p>
+      </div>
+      <div class="foot-col"><h4>Product</h4><a href="#features">Features</a><a href="#how">How It Works</a><a href="#pricing">Pricing</a><a href="#">Integrations</a></div>
+      <div class="foot-col"><h4>Company</h4><a href="#about">About</a><a href="#">Careers</a><a href="#">Blog</a><a href="#">Contact</a></div>
+      <div class="foot-col"><h4>Resources</h4><a href="#">Help Center</a><a href="#">API Docs</a><a href="#">Guides</a><a href="#">Status</a></div>
+      <div class="foot-col"><h4>Legal</h4><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Security</a><a href="#">Cookies</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Lea Track. Created by Shruthi Ravi Kumar.</span>
+      <span>Smart Lead Tracking</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Sticky nav shadow
+  var nav = document.getElementById('nav');
+  var onScroll = function () { nav.classList.toggle('scrolled', window.scrollY > 12); };
+  onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Mobile menu
+  var burger = document.getElementById('burger');
+  var menu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', function () { menu.classList.toggle('open'); });
+  menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { menu.classList.remove('open'); }); });
+
+  // Scroll reveal
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.reveal:not(.in)').forEach(function (el) { io.observe(el); });
+</script>
+</body>
+</html>
