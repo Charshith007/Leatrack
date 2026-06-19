@@ -1,8 +1,10 @@
 import { useState, useMemo } from "react";
 import { Icons } from "../icons.jsx";
 import { uid } from "../lib/data.js";
+import { conversionProbability } from "../lib/ai.js";
 import { Avatar } from "../components/Avatar.jsx";
 import { StatusPill } from "../components/Badges.jsx";
+import { PredictionBadge } from "../components/PredictionBadge.jsx";
 import { SearchInput } from "../components/SearchInput.jsx";
 import { Modal } from "../components/Modal.jsx";
 import { ContactForm, blankContact } from "./ContactForm.jsx";
@@ -56,7 +58,7 @@ export function LeadManager({ data, setData, toast }) {
         <table className="tbl">
           <thead><tr>
             <Th k="first">First name</Th><Th k="last">Last name</Th><Th k="email">Email</Th>
-            <Th k="city">City</Th><Th k="state">State</Th><th>Status</th><th>Property</th><th style={{ textAlign: "right" }}>Action</th>
+            <Th k="city">City</Th><th>Status</th><th>AI predicted</th><th style={{ textAlign: "right" }}>Action</th>
           </tr></thead>
           <tbody>
             {rows.map((c) => (
@@ -64,10 +66,9 @@ export function LeadManager({ data, setData, toast }) {
                 <td><div className="person"><Avatar first={c.first} last={c.last} size={28} /><span style={{ fontWeight: 700 }}>{c.first}</span></div></td>
                 <td style={{ fontWeight: 600 }}>{c.last}</td>
                 <td style={{ color: "var(--text-2)" }}>{c.email}</td>
-                <td style={{ color: "var(--text-2)" }}>{c.city}</td>
-                <td style={{ color: "var(--text-2)" }}>{c.state}</td>
+                <td style={{ color: "var(--text-2)" }}>{c.city}, {c.state}</td>
                 <td><StatusPill status={c.status} /></td>
-                <td style={{ color: "var(--text-2)", whiteSpace: "nowrap" }}>{c.property}</td>
+                <td style={{ width: 130 }}><PredictionBadge prob={conversionProbability(c)} /></td>
                 <td style={{ textAlign: "right" }}><button className="icon-btn" title="Delete lead" onClick={() => del(c.id)} style={{ color: "var(--danger)" }}><Icons.Trash size={16} /></button></td>
               </tr>
             ))}

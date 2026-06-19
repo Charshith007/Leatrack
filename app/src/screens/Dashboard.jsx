@@ -2,12 +2,14 @@ import { useMemo } from "react";
 import { Icons } from "../icons.jsx";
 import { PROPERTIES } from "../lib/data.js";
 import { STAGE_META, fmtDate } from "../lib/helpers.js";
+import { buildInsights } from "../lib/ai.js";
 import { StatCard } from "../components/StatCard.jsx";
 import { Donut } from "../components/Donut.jsx";
 
 export function Dashboard({ data, onNav }) {
   const { contacts, leads, activity } = data;
   const byStage = (s) => contacts.filter((c) => c.stage === s).length;
+  const insights = useMemo(() => buildInsights(contacts), [contacts]);
 
   const propStats = useMemo(() => {
     const map = {};
@@ -81,6 +83,16 @@ export function Dashboard({ data, onNav }) {
             <span style={{ fontSize: 13, color: "var(--text-2)" }}><b style={{ color: "var(--text)" }}>{leads.length} qualified leads</b> handed to sales</span>
           </div>
         </div>
+      </div>
+
+      <div className="card card-hover" style={{ padding: 22, marginBottom: 16, display: "flex", alignItems: "center", gap: 18, cursor: "pointer" }} onClick={() => onNav("insights")}>
+        <span style={{ width: 44, height: 44, borderRadius: 11, background: "var(--ink)", color: "var(--rocket)", display: "grid", placeItems: "center", flex: "none" }}><Icons.Brain size={22} /></span>
+        <div style={{ flex: 1 }}>
+          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: ".08em", color: "var(--text-3)", marginBottom: 2 }}>AI INSIGHTS</div>
+          <div style={{ fontSize: 14.5, fontWeight: 700 }}>Average predicted conversion likelihood: <span style={{ color: "var(--rocket)" }}>{insights.avgProb}%</span></div>
+          <div style={{ fontSize: 12.5, color: "var(--text-3)", marginTop: 1 }}>{insights.segCounts.find((s) => s.label === "Hot mover")?.value || 0} hot movers · {insights.dupGroups.length} possible duplicates flagged</div>
+        </div>
+        <button className="btn btn-subtle btn-sm">Open AI Insights <Icons.ChevronRight size={15} /></button>
       </div>
 
       <div className="card" style={{ padding: 22 }}>

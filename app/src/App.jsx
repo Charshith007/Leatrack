@@ -8,12 +8,15 @@ import { Dashboard } from "./screens/Dashboard.jsx";
 import { ContactManager } from "./screens/ContactManager.jsx";
 import { LeadManager } from "./screens/LeadManager.jsx";
 import { UserManager } from "./screens/UserManager.jsx";
+import { AIInsights } from "./screens/AIInsights.jsx";
+import { AIChatWidget } from "./components/AIChatWidget.jsx";
 
 const ROUTE_META = {
   dashboard: { title: "Dashboard", sub: "A live summary of every lead across all properties" },
   contacts: { title: "Contact Manager", sub: "Move people through Contact → Enrich → Convert" },
   leads: { title: "Lead Manager", sub: "Qualified leads, ready for the sales team" },
   users: { title: "User Manager", sub: "Who has access to the LEA Track workspace" },
+  insights: { title: "AI Insights", sub: "Predicted conversions, segments and recommended actions" },
 };
 
 export default function App() {
@@ -53,9 +56,11 @@ export default function App() {
           {route === "contacts" && <ContactManager data={data} setData={setData} toast={toast} />}
           {route === "leads" && <LeadManager data={data} setData={setData} toast={toast} />}
           {route === "users" && <UserManager data={data} setData={setData} toast={toast} />}
+          {route === "insights" && <AIInsights data={data} onNav={setRoute} />}
         </div>
       </div>
       {toastNode}
+      <AIChatWidget data={data} />
     </div>
   );
 }

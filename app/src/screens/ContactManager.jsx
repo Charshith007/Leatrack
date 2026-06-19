@@ -2,12 +2,16 @@ import { useState, useMemo, useRef } from "react";
 import { Icons } from "../icons.jsx";
 import { uid, PROPERTIES } from "../lib/data.js";
 import { STAGE_META } from "../lib/helpers.js";
+import { buildInsights } from "../lib/ai.js";
 import { Avatar } from "../components/Avatar.jsx";
 import { StatusPill } from "../components/Badges.jsx";
 import { ScoreBar } from "../components/ScoreBar.jsx";
+import { PredictionBadge } from "../components/PredictionBadge.jsx";
 import { SearchInput } from "../components/SearchInput.jsx";
 import { Modal } from "../components/Modal.jsx";
 import { ContactForm, blankContact } from "./ContactForm.jsx";
+
+const ACTION_ICON = { Phone: Icons.Phone, Mail: Icons.Mail, Spark: Icons.Spark };
 
 export function ContactManager({ data, setData, toast }) {
   const [tab, setTab] = useState("contact");
@@ -31,6 +35,13 @@ export function ContactManager({ data, setData, toast }) {
 
   const counts = { contact: 0, enrich: 0, convert: 0 };
   data.contacts.forEach((c) => counts[c.stage]++);
+
+  const insights = useMemo(() => buildInsights(data.contacts), [data.contacts]);
+  const enrichedById = useMemo(() => {
+    const m = new Map();
+    insights.enriched.forEach((c) => m.set(c.id, c));
+    return m;
+  }, [insights]);
 
   const advance = (c) => {
     const order = ["contact", "enrich", "convert"];
@@ -145,24 +156,49 @@ export function ContactManager({ data, setData, toast }) {
       <div className="card tbl-wrap scrollbar">
         <table className="tbl">
           <thead><tr>
-            <th>Name</th><th>Email</th><th>Location</th><th>Status</th><th>Property</th><th>Score</th><th style={{ textAlign: "right" }}>Action</th>
+            <th>Name</th><th>Email</th><th>Location</th><th>Status</th><th>Score</th><th>AI predicted</th><th style={{ textAlign: "right" }}>Action</th>
           </tr></thead>
           <tbody>
-            {rows.map((c) => (
-              <tr key={c.id}>
-                <td><div className="person"><Avatar first={c.first} last={c.last} /><div style={{ lineHeight: 1.25 }}><div style={{ fontWeight: 700 }}>{c.first} {c.last}</div><div style={{ fontSize: 11.5, color: "var(--text-3)" }}>{c.source}</div></div></div></td>
-                <td style={{ color: "var(--text-2)" }}>{c.email}</td>
-                <td style={{ color: "var(--text-2)", whiteSpace: "nowrap" }}>{c.city}, {c.state}</td>
-                <td><StatusPill status={c.status} /></td>
-                <td style={{ color: "var(--text-2)", whiteSpace: "nowrap" }}>{c.property}</td>
-                <td><ScoreBar score={c.score} /></td>
-                <td style={{ textAlign: "right" }}>
-                  <button className="btn btn-ghost btn-sm" onClick={() => advance(c)} style={{ color: STAGE_META[tab].color, borderColor: STAGE_META[tab].color + "55" }}>
-                    {nextLabel} <Icons.ArrowRight size={15} />
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {rows.map((c) => {
+              const ai = enrichedById.get(c.id);
+              const isDup = insights.dupIds.has(c.id);
+              const ActionIcon = ai ? (ACTION_ICON[ai.action.icon] || Icons.Spark) : Icons.Spark;
+              return (
+                <tr key={c.id}>
+                  <td>
+                    <div className="person">
+                      <Avatar first={c.first} last={c.last} />
+                      <div style={{ lineHeight: 1.25 }}>
+                        <div style={{ fontWeight: 700, display: "flex", alignItems: "center", gap: 6 }}>
+                          {c.first} {c.last}
+                          {isDup && <span title="Possible duplicate" style={{ color: "var(--danger)", display: "inline-flex" }}><Icons.AlertTriangle size={13} /></span>}
+                        </div>
+                        <div style={{ fontSize: 11.5, color: "var(--text-3)" }}>{c.source}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td style={{ color: "var(--text-2)" }}>{c.email}</td>
+                  <td style={{ color: "var(--text-2)", whiteSpace: "nowrap" }}>{c.city}, {c.state}</td>
+                  <td><StatusPill status={c.status} /></td>
+                  <td><ScoreBar score={c.score} /></td>
+                  <td>
+                    {ai && (
+                      <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                        <PredictionBadge prob={ai.prob} />
+                        <span style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 11, fontWeight: 600, color: "var(--text-3)" }}>
+                          <ActionIcon size={12} /> {ai.action.label}
+                        </span>
+                      </div>
+                    )}
+                  </td>
+                  <td style={{ textAlign: "right" }}>
+                    <button className="btn btn-ghost btn-sm" onClick={() => advance(c)} style={{ color: STAGE_META[tab].color, borderColor: STAGE_META[tab].color + "55" }}>
+                      {nextLabel} <Icons.ArrowRight size={15} />
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
         {rows.length === 0 && <div className="empty">No contacts in {STAGE_META[tab].label}{q ? ` matching "${q}"` : ""}.</div>}

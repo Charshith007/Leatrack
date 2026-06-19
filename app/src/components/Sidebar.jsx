@@ -6,6 +6,7 @@ export function Sidebar({ route, onNav, collapsed, onLogout, counts }) {
     { id: "dashboard", label: "Dashboard", icon: Icons.Grid },
     { id: "contacts", label: "Contact Manager", icon: Icons.Contacts, count: counts.contacts },
     { id: "leads", label: "Lead Manager", icon: Icons.Leads, count: counts.leads },
+    { id: "insights", label: "AI Insights", icon: Icons.Brain },
     { id: "users", label: "User Manager", icon: Icons.Users },
   ];
   return (
