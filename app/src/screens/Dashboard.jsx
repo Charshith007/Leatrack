@@ -20,6 +20,8 @@ export function Dashboard({ data, onNav }) {
   const total = contacts.length;
   const convRate = total ? Math.round((byStage("convert") / total) * 100) : 0;
 
+  const ACTIVITY_ICON = { added: Icons.Plus, enriched: Icons.Spark, moved: Icons.ArrowRight, graduated: Icons.Trend, emailed: Icons.Mail, called: Icons.Phone, imported: Icons.Upload };
+
   const FunnelRow = ({ stage }) => {
     const m = STAGE_META[stage]; const n = byStage(stage);
     const pct = total ? Math.round((n / total) * 100) : 0;
@@ -84,13 +86,18 @@ export function Dashboard({ data, onNav }) {
       <div className="card" style={{ padding: 22 }}>
         <h3 style={{ margin: "0 0 14px", fontSize: 15, fontWeight: 700 }}>Recent activity</h3>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          {activity.map((a, i) => (
-            <div key={a.id} style={{ display: "flex", alignItems: "center", gap: 12, padding: "11px 0", borderBottom: i < activity.length - 1 ? "1px solid var(--border)" : "none" }}>
-              <span style={{ width: 8, height: 8, borderRadius: 99, background: "var(--rocket)", flex: "none" }}></span>
-              <span style={{ fontSize: 13.5, flex: 1 }}><b>{a.who}</b> {a.verb} <b>{a.target}</b> {a.tail}</span>
-              <span style={{ fontSize: 12, color: "var(--text-3)" }}>{fmtDate(a.when)}</span>
-            </div>
-          ))}
+          {activity.map((a, i) => {
+            const ActIcon = ACTIVITY_ICON[a.verb] || Icons.Dot;
+            return (
+              <div key={a.id} style={{ display: "flex", alignItems: "center", gap: 12, padding: "11px 0", borderBottom: i < activity.length - 1 ? "1px solid var(--border)" : "none" }}>
+                <span style={{ width: 26, height: 26, borderRadius: 8, background: "var(--rocket-50)", color: "var(--rocket)", display: "grid", placeItems: "center", flex: "none" }}>
+                  <ActIcon size={14} />
+                </span>
+                <span style={{ fontSize: 13.5, flex: 1 }}><b>{a.who}</b> {a.verb} <b>{a.target}</b> {a.tail}</span>
+                <span style={{ fontSize: 12, color: "var(--text-3)" }}>{fmtDate(a.when)}</span>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

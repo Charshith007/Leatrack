@@ -1,6 +1,6 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import { Icons } from "../icons.jsx";
-import { uid } from "../lib/data.js";
+import { uid, PROPERTIES } from "../lib/data.js";
 import { STAGE_META } from "../lib/helpers.js";
 import { Avatar } from "../components/Avatar.jsx";
 import { StatusPill } from "../components/Badges.jsx";
@@ -14,6 +14,7 @@ export function ContactManager({ data, setData, toast }) {
   const [q, setQ] = useState("");
   const [adding, setAdding] = useState(false);
   const [form, setForm] = useState(blankContact("contact"));
+  const fileRef = useRef(null);
 
   const tabs = [
     { id: "contact", label: "Contact", desc: "Raw interest" },
@@ -72,6 +73,47 @@ export function ContactManager({ data, setData, toast }) {
     URL.revokeObjectURL(url); toast("Exported " + rows.length + " contacts");
   };
 
+  const parseCsv = (text) => {
+    const lines = text.split(/\r?\n/).filter((l) => l.trim());
+    if (lines.length < 2) return [];
+    const splitRow = (line) => line.match(/(".*?"|[^,]+)(?=,|$)/g)?.map((v) => v.replace(/^"|"$/g, "").replace(/""/g, '"').trim()) || [];
+    const cols = splitRow(lines[0]).map((c) => c.toLowerCase());
+    return lines.slice(1).map((line) => {
+      const vals = splitRow(line);
+      const row = {};
+      cols.forEach((c, i) => { row[c] = vals[i] ?? ""; });
+      return row;
+    });
+  };
+
+  const importCsv = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const parsed = parseCsv(String(reader.result));
+      const imported = parsed
+        .filter((r) => r.first && r.last && r.email)
+        .map((r) => ({
+          first: r.first, last: r.last, email: r.email,
+          city: r.city || "", state: r.state || "",
+          status: r.status || "Imported",
+          property: r.property || PROPERTIES[0],
+          source: "CSV import", stage: tab,
+          score: tab === "contact" ? 12 : tab === "enrich" ? 48 : 80,
+          id: uid(), updated: new Date().toISOString(),
+        }));
+      if (imported.length === 0) { toast("No valid rows found (need first, last, email columns)"); return; }
+      setData((d) => ({ ...d,
+        contacts: [...imported, ...d.contacts],
+        activity: [{ id: uid(), who: "You", verb: "imported", target: imported.length + " contacts", tail: "via CSV", when: new Date().toISOString() }, ...d.activity].slice(0, 8),
+      }));
+      toast(`Imported ${imported.length} contact${imported.length !== 1 ? "s" : ""}`);
+    };
+    reader.readAsText(file);
+    e.target.value = "";
+  };
+
   const nextLabel = tab === "convert" ? "Graduate" : "Move to " + STAGE_META[{ contact: "enrich", enrich: "convert" }[tab]].label;
 
   return (
@@ -94,7 +136,8 @@ export function ContactManager({ data, setData, toast }) {
       <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14, flexWrap: "wrap" }}>
         <SearchInput value={q} onChange={setQ} />
         <div style={{ flex: 1 }}></div>
-        <button className="btn btn-ghost btn-sm" onClick={() => toast("Upload: choose a CSV, photo, or file")}><Icons.Upload size={16} /> Upload file</button>
+        <input ref={fileRef} type="file" accept=".csv,text/csv" style={{ display: "none" }} onChange={importCsv} />
+        <button className="btn btn-ghost btn-sm" onClick={() => fileRef.current?.click()}><Icons.Upload size={16} /> Import CSV</button>
         <button className="btn btn-ghost btn-sm" onClick={exportCsv}><Icons.Download size={16} /> Export</button>
         <button className="btn btn-primary btn-sm" onClick={() => { setForm(blankContact(tab)); setAdding(true); }}><Icons.Plus size={16} /> Add contact</button>
       </div>

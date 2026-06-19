@@ -1,7 +1,7 @@
 export function StatCard({ label, value, sub, accent, icon }) {
   const Icon = icon;
   return (
-    <div className="card" style={{ padding: 18, display: "flex", flexDirection: "column", gap: 10 }}>
+    <div className="card card-hover stat-card" style={{ "--accent": accent || "var(--rocket)", padding: 18, display: "flex", flexDirection: "column", gap: 10 }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
         <span style={{ fontSize: 12.5, fontWeight: 600, color: "var(--text-2)" }}>{label}</span>
         <span style={{ width: 32, height: 32, borderRadius: 9, display: "grid", placeItems: "center",
